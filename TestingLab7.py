@@ -12,11 +12,11 @@ def reverse(link):
 
     print_link(ll)"""
     l = link
-    linkedList = Link.empty
+    linkedList = Link(l[Link.__len__(l)-1])
     for i in reversed(range(0,Link.__len__(l)-1)):
-        print("current value", l[i+1])
-        print("LinkedList", linkedList)
-        linkedList = add_links(linkedList, Link(l[i+1], Link(l[i])))
+        #print("current value", l[i+1])
+        #print("LinkedList", linkedList)
+        linkedList = add_links(linkedList, Link(l[i]))
     return linkedList
 
 
@@ -52,7 +52,11 @@ def rep_link(link):
     """  Modified print_link to return string  """
     return ('<' + helper(link).rstrip() + '>')
 
-
+def findposition(link, val):
+    for i in range(0,Link.__len__(link)):
+        if link[i] == val:
+            a=i
+            return a
 def mygetitem(s, i):
     #if isinstance(i, slice):
        #return slice__link(s, i.start, i.stop)
@@ -109,10 +113,15 @@ if __name__ == "__main__":
     l2 = Link(3, Link(4, Link(5)))
     print(add_links(l1, l2))
     l3 = add_links(l1, l2)
+    link = Link(1, Link(2, Link(3)))
     print(Link.__len__(l1))
-    print(l3.rest[Link.__len__(l3.rest)-2])
+    print_link(reverse(l3))
+    print_link(reverse(l1))
+    print_link(reverse(l2))
+    new = reverse(link)
+    print(new)
     print(reverse(l3))
-    print(reverse(l1))
-    print(reverse(l2))
+    print(findposition(reverse(l3), 3))
+
 
 

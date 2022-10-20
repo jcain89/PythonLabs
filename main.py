@@ -14,7 +14,16 @@ def reverse(link):
     <1 2 3>
     """
     "*** YOUR CODE HERE ***"
-    return link.__getitem__(0)
+    l = link
+    if Link.__len__(link) == 1:
+        return link
+    else:
+        linkedList = Link(l[Link.__len__(l) - 1])
+        for i in reversed(range(0, Link.__len__(l) - 1)):
+            # print("current value", l[i+1])
+            # print("LinkedList", linkedList)
+            linkedList = add_links(linkedList, Link(l[i]))
+        return linkedList
 
 
 
@@ -50,6 +59,11 @@ def slice_link(link, start, end):
     <1 4 1>
     """
     "*** YOUR CODE HERE ***"
+    diff = end - start
+    slicedLinkedList = Link.empty
+    for j in range(0,diff):
+        slicedLinkedList = add_links(slicedLinkedList,Link(link[start+j]))
+    return slicedLinkedList
 
 
 # RQ4 Complete the code for the mygetitem and mysetitem
@@ -58,9 +72,19 @@ def rep_link(link):
     """  Modified print_link to return string  """
     return ('<' + helper(link).rstrip() + '>')
 
+def findposition(link, val):
+    for i in range(0,Link.__len__(link)):
+        if link[i] == val:
+            a=i
+            return a
 
 def mygetitem(s, i):
-    pass
+    if isinstance(i,slice):
+        return slice_link(s, i.start, i.stop)
+    if i == 0:
+        return s.first
+    else:
+        return s.rest[i-1]
 
 
 # You will need to modify mygetitem to handle slice types as follows...
@@ -68,7 +92,10 @@ def mygetitem(s, i):
 #           return slice__link(s, i.start, i.stop)...
 
 def mysetitem(s, i, item):
-    pass
+    if i == 0:
+        item = s.first
+    else:
+        item = s.rest[i-1]
 
 
 # Code base for this Linked List Class
@@ -79,6 +106,9 @@ class Link:
         assert rest is Link.empty or isinstance(rest, Link)
         self.first = first
         self.rest = rest
+
+    def __len__(self):
+        return 1 + len(self.rest)
 
 
 def print_link(link):
