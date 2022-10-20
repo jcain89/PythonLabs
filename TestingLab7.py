@@ -4,14 +4,23 @@
 def reverse(link):
     """Returns a Link that is the reverse of the original."""
     "*** YOUR CODE HERE ***"
-    prev = None
-    current = link.head
-    while (current is not None):
-        next = current.next
-        current.next = prev
-        prev = current
-        current = next
-    link.head = prev
+    """linkedList = Link()
+    ll = Link.empty
+    length = Link.__len__(linkedList)
+    ll = linkedList.rest[length - 1]
+    linkedList = linkedList.rest[length-2]
+
+    print_link(ll)"""
+    l = link
+    linkedList = Link.empty
+    for i in reversed(range(0,Link.__len__(l)-1)):
+        print("current value", l[i+1])
+        print("LinkedList", linkedList)
+        linkedList = add_links(linkedList, Link(l[i+1], Link(l[i])))
+    return linkedList
+
+
+
 
 
 
@@ -99,6 +108,11 @@ if __name__ == "__main__":
     l1 = Link(1, Link(2))
     l2 = Link(3, Link(4, Link(5)))
     print(add_links(l1, l2))
+    l3 = add_links(l1, l2)
+    print(Link.__len__(l1))
+    print(l3.rest[Link.__len__(l3.rest)-2])
+    print(reverse(l3))
     print(reverse(l1))
+    print(reverse(l2))
 
 
