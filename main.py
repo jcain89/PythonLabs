@@ -93,9 +93,9 @@ def mygetitem(s, i):
 
 def mysetitem(s, i, item):
     if i == 0:
-        item = s.first
+        s.first = item
     else:
-        item = s.rest[i-1]
+        s.rest[i-1] = item
 
 
 # Code base for this Linked List Class

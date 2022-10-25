@@ -44,6 +44,11 @@ def add_links(link1, link2):
 def slice_link(link, start, end):
     """Slices a Link from start to end (as with a normal Python list)."""
     "*** YOUR CODE HERE ***"
+    diff = end - start
+    slicedLinkedList = Link.empty
+    for j in range(0, diff):
+        slicedLinkedList = add_links(slicedLinkedList, Link(link[start + j]))
+    return slicedLinkedList
 
 
 # RQ4 Complete the code for the mygetitem and mysetitem
@@ -58,8 +63,8 @@ def findposition(link, val):
             a=i
             return a
 def mygetitem(s, i):
-    #if isinstance(i, slice):
-       #return slice__link(s, i.start, i.stop)
+    if isinstance(i, slice):
+       return slice_link(s, i.start, i.stop)
     if i == 0:
         return s.first
     else:
@@ -71,7 +76,10 @@ def mygetitem(s, i):
 #           return slice__link(s, i.start, i.stop)...
 
 def mysetitem(s, i, item):
-    pass
+    if i == 0:
+        s.first = item
+    else:
+        s.rest[i-1] = item
 
 
 # Code base for this Linked List Class
@@ -114,14 +122,12 @@ if __name__ == "__main__":
     print(add_links(l1, l2))
     l3 = add_links(l1, l2)
     link = Link(1, Link(2, Link(3)))
-    print(Link.__len__(l1))
-    print_link(reverse(l3))
-    print_link(reverse(l1))
-    print_link(reverse(l2))
-    new = reverse(link)
-    print(new)
-    print(reverse(l3))
-    print(findposition(reverse(l3), 3))
+    l3[0] = 30
+    print(l3[1:3])
+    print(l3[1:5])
+    print(l3[1:4])
+    mysetitem(l3,0,30)
+    print(l3)
 
 
 
